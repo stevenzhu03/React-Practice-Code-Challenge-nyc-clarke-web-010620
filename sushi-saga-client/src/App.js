@@ -8,7 +8,9 @@ const API = "http://localhost:3000/sushis"
 class App extends Component {
 
   state= {
-    sushis: []
+    sushis: [],
+    indexStart:0,
+    indexEnd:4
   }
 
   componentDidMount() {
@@ -19,10 +21,17 @@ class App extends Component {
     }))
   }
 
+  moreButtonHandler = () => {
+    this.setState(prevState => ({
+      indexStart: prevState.indexStart + 4,
+      indexEnd: prevState.indexEnd + 4
+    }))
+  }
+
   render() {
     return (
       <div className="app">
-        <SushiContainer sushis={this.state.sushis}/>
+        <SushiContainer sushis={this.state.sushis} start={this.state.indexStart} end={this.state.indexEnd} moreButtonHandler={this.moreButtonHandler}/>
         <Table />
       </div>
     );
