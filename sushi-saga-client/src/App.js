@@ -9,8 +9,10 @@ class App extends Component {
 
   state= {
     sushis: [],
+    eatenSushis:[],
     indexStart:0,
-    indexEnd:4
+    indexEnd:4,
+    startMoney: 200
   }
 
   componentDidMount() {
@@ -28,11 +30,20 @@ class App extends Component {
     }))
   }
 
+  eatSushi = (id) => {
+    let sushiIndex = id - 1
+    console.log(sushiIndex)
+    this.setState(prevState => ({
+      eatenSushis: prevState.eatenSushis.concat(this.state.sushis[sushiIndex]),
+      sushis: prevState.sushis.splice(sushiIndex, 1)
+    }))
+  }
+
   render() {
     return (
       <div className="app">
-        <SushiContainer sushis={this.state.sushis} start={this.state.indexStart} end={this.state.indexEnd} moreButtonHandler={this.moreButtonHandler}/>
-        <Table />
+        <SushiContainer sushis={this.state.sushis} start={this.state.indexStart} end={this.state.indexEnd} moreButtonHandler={this.moreButtonHandler} eatSushi={this.eatSushi}/>
+        <Table startMoney={this.state.startMoney} eatenSushi={this.state.eatenSushis}/>
       </div>
     );
   }
