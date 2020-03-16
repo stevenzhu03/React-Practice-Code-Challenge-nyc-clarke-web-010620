@@ -7,6 +7,19 @@ const API = "http://localhost:3000/sushis"
 
 class App extends Component {
 
+  state= {
+    sushis: []
+  }
+
+  componentDidMount() {
+    fetch(API)
+    .then(resp => resp.json())
+    .then(sushis => {
+      this.setState{
+        sushis: sushis
+    })
+  }
+
   render() {
     return (
       <div className="app">
