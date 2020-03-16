@@ -14,16 +14,15 @@ class App extends Component {
   componentDidMount() {
     fetch(API)
     .then(resp => resp.json())
-    .then(sushis => {
-      this.setState{
-        sushis: sushis
-    })
+    .then(sushis => this.setState({
+      sushis: sushis
+    }))
   }
 
   render() {
     return (
       <div className="app">
-        <SushiContainer />
+        <SushiContainer sushis={this.state.sushis}/>
         <Table />
       </div>
     );
